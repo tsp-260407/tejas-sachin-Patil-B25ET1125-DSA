@@ -1,0 +1,76 @@
+Program 1 :(Stack)
+#include <stdio.h>
+#define MAX 5
+
+int stack[MAX], top = -1;
+
+int main() {
+    int ch, x;
+
+    while (1) {
+        printf("\n1.Push 2.Pop 3.Display 4.Exit\n");
+        scanf("%d", &ch);
+
+        if (ch == 1) {
+            if (top == MAX - 1)
+                printf("Overflow");
+            else {
+                scanf("%d", &x);
+                stack[++top] = x;
+            }
+        }
+        else if (ch == 2) {
+            if (top == -1)
+                printf("Underflow");
+            else
+                printf("Popped: %d", stack[top--]);
+        }
+        else if (ch == 3) {
+            for (int i = top; i >= 0; i--)
+                printf("%d ", stack[i]);
+        }
+        else
+            break;
+    }
+
+    return 0;
+}
+
+
+Program 2: (Queue)
+#include <stdio.h>
+#define MAX 5
+
+int q[MAX], front = 0, rear = -1;
+
+int main() {
+    int ch, x;
+
+    while (1) {
+        printf("\n1.Enqueue 2.Dequeue 3.Display 4.Exit\n");
+        scanf("%d", &ch);
+
+        if (ch == 1) {
+            if (rear == MAX - 1)
+                printf("Overflow");
+            else {
+                scanf("%d", &x);
+                q[++rear] = x;
+            }
+        }
+        else if (ch == 2) {
+            if (front > rear)
+                printf("Underflow");
+            else
+                printf("Deleted: %d", q[front++]);
+        }
+        else if (ch == 3) {
+            for (int i = front; i <= rear; i++)
+                printf("%d ", q[i]);
+        }
+        else
+            break;
+    }
+
+    return 0;
+}
