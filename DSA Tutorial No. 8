@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct treenode {
+    int data;
+    struct treenode *left,*right;
+};
+
+struct treenode* create(int value) {
+    struct treenode *newnode = malloc (sizeof(struct treenode));
+ newnode->data = value;
+    newnode->left = newnode->right = NULL;
+    return newnode;
+}
+
+struct treenode* insert(struct treenode *tree, int value) {
+    if (tree == NULL)
+        return create(value);
+
+    if (value < tree->data)
+        tree->left = insert(tree->left, value);
+    else
+        tree->right = insert(tree->right, value);
+
+    return tree;
+}
+
+    void inorder(struct treenode *tree) {
+    if (tree != NULL) {
+        inorder(tree->left);
+        printf("%d ", tree->data);
+        inorder(tree->right);
+    }
+}
+    
+int main() {
+    struct treenode *tree = NULL;
+    tree = insert(tree, 50);
+    insert(tree, 30);
+    insert(tree, 70);
+    insert(tree, 20);
+    insert(tree, 40);
+
+printf("Inorder Traversal: ");
+    inorder(tree);
+
+    return 0;
+}
