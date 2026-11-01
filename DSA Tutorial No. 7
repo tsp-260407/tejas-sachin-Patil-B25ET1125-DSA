@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char s[50];
+    int st[50], t = -1, i, a, b;
+    scanf("%s", s);
+
+    for (i = 0; s[i]; i++) {
+        if (isdigit(s[i])) st[++t] = s[i] - '0';
+        else {
+            b = st[t--]; a = st[t--];
+            if (s[i] == '+') st[++t] = a + b;
+            if (s[i] == '-') st[++t] = a - b;
+            if (s[i] == '*') st[++t] = a * b;
+            if (s[i] == '/') st[++t] = a / b;
+        }
+    }
+    printf("%d", st[t]);
+    return 0;
+}
