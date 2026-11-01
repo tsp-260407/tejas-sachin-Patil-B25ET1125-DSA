@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *left, *right;
+};
+
+struct node* insert(struct node *r, int x) {
+    if (!r) {
+        r = malloc(sizeof(struct node));
+        r->data = x;
+        r->left = r->right = NULL;
+    } else if (x < r->data)
+        r->left = insert(r->left, x);
+    else if (x > r->data)
+        r->right = insert(r->right, x);
+    return r;
+}
+
+void inorder(struct node *r) {
+    if (r) {
+        inorder(r->left);
+        printf("%d ", r->data);
+        inorder(r->right);
+    }
+}
+
+int main() {
+    struct node *root = NULL;
+    int x, i, n, key;
+    scanf("%d", &n);
+    for (i = 0; i < n; i++) {
+        scanf("%d", &x);
+        root = insert(root, x);
+    }
+    inorder(root);
+    scanf("%d", &key);
+    while (root && root->data != key)
+        root = key < root->data ? root->left : root->right;
+    printf(root ? "\nFound" : "\nNot Found");
+    return 0;
+}
